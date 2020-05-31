@@ -1,0 +1,34 @@
+body {
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("assets/background.jpg");
+    background-size: cover;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.main-content {
+    padding-top: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}

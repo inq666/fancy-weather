@@ -1,0 +1,5 @@
+@import "../../sass/abstracts/mixins";
+
+.change-language {
+    @include control-button;
+}

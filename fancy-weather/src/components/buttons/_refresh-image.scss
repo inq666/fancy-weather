@@ -1,0 +1,18 @@
+@import "../../sass/abstracts/mixins";
+@import "../../sass/abstracts/variables";
+
+.refresh-image {
+  @include control-button;
+
+  position: relative;
+  .icon {
+    position: absolute;
+    fill: $white;
+    top: -4px;
+    left: 5px;
+    transition: transform 1s linear;
+    &:hover {
+      transform: rotate(360deg);
+    }
+  }
+}

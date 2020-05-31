@@ -1,0 +1,5 @@
+@import "../../sass/abstracts/mixins";
+
+.change-degree {
+    @include control-button;
+}
