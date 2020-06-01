@@ -27,8 +27,13 @@ p {
     margin: 0 0 10px;
 }
 
-.main-content {
+.wrapper {
     padding-top: 25px;
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
 }

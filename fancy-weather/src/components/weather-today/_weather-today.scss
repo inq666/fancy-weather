@@ -1,0 +1,42 @@
+@import "../../sass/abstracts/variables";
+
+.weather-today {
+  position: relative;
+
+  display: flex;
+
+  .degree {
+    font-weight: bold;
+    font-size: 20rem;
+
+    .degree__elem {
+      font-size: 10rem;
+      vertical-align: top;
+    }
+  }
+
+  .weather-info {
+    position: absolute;
+    top: -80px;
+    right: 0;
+
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-align: center;
+    text-transform: uppercase;
+
+    .weather-container {
+      position: relative;
+
+      .weather-image {
+        right: 50px;
+        position: relative;
+        width: 220px;
+        height: 220px;
+
+        background-image: url("../../assets/weather-icon/111.png");
+        background-size: cover;
+      }
+    }
+  }
+}
