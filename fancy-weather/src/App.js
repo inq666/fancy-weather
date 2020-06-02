@@ -2,20 +2,30 @@ import React, { Component } from 'react';
 import './_App.scss';
 import Control from './layout/Control/Control';
 import Main from './layout/Main/Main';
-import Map from './components/map/Map';
+import Geolocation from './components/geolocation/Geolocation';
 
+const Context = React.createContext()
 class App extends Component {
+
+  uptadeData(newCity) {
+    this.setState({
+      currentCity: newCity,
+    })
+  }
+
   render() {
     return (
       <div className="wrapper">
-        <Control />
+        <Context.Provider value={this.uptadeData.bind(this)}>
+          <Control />
+        </Context.Provider>
         <div className="content">
           <Main />
-          <Map />
+          <Geolocation city={this.state ? this.state.currentCity : null} />
         </div>
       </div>
     )
   }
 }
 
-export default App;
+export { App, Context }
