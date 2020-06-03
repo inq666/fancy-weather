@@ -3,7 +3,6 @@ import "./_control.scss";
 import ChangeDegree from '../../components/buttons/ChangeDegree';
 import ChangeLanguage from '../../components/buttons/ChangeLanguage';
 import RefreshImage from '../../components/buttons/RefreshImage';
-import Search from '../../components/geolocation/search/Search';
 
 class Control extends Component {
   render() {

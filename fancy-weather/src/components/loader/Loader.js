@@ -8,8 +8,8 @@ class App extends Component {
       <Loader className="loader"
         type="Oval"
         color="#ffffff"
-        height={350}
-        width={350}
+        height={400}
+        width={400}
       />
     );
   }
