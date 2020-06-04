@@ -9,7 +9,7 @@ class Main extends Component {
   render() {
     return (
       <div className="main">
-        <LocationTitle locationName={this.props.locationName} />
+        <LocationTitle locationData={this.props.locationData} />
         <WeatherToday />
         <WeatherForecast />
       </div>

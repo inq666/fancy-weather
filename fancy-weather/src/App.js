@@ -20,22 +20,24 @@ class App extends Component {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=en`;
     const response = await fetch(url);
     const json = await response.json();
+    const result = json.results[0];
     console.log(json)
-    const currentCity = json.results[0].components.city ? json.results[0].components.city :
-      json.results[0].components.county ? json.results[0].components.county :
-        json.results[0].components.state
+    const currentCity = result.components.city ? result.components.city :
+      result.components.county ? result.components.county :
+        result.components.state
     this.setState({
-      locationName: {
-        currentCounty: json.results[0].components.country,
+      locationData: {
+        currentCountry: result.components.country,
         currentCity: currentCity,
+        locationUTC: result.annotations.timezone.offset_string,
       },
       latitude: {
-        coordinates: json.results[0].geometry.lat,
-        coordinatesName: json.results[0].annotations.DMS.lat
+        coordinates: result.geometry.lat,
+        coordinatesName: result.annotations.DMS.lat
       },
       longitude: {
-        coordinates: json.results[0].geometry.lng,
-        coordinatesName: json.results[0].annotations.DMS.lng
+        coordinates: result.geometry.lng,
+        coordinatesName: result.annotations.DMS.lng
       }
     }
     )
@@ -48,7 +50,7 @@ class App extends Component {
         {this.state !== null
           ?
           <div className="content">
-            <Main locationName={this.state.locationName} />
+            <Main locationData={this.state.locationData} />
             <Geolocation uptadeData={this.uptadeData.bind(this)} data={{
               latitude: this.state.latitude,
               longitude: this.state.longitude
