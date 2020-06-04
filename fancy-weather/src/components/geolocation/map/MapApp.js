@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import Coordinates from './Coordinates';
-import Context from '../../../App';
 
 class MapApp extends Component {
   render() {

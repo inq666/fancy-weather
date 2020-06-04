@@ -1,4 +1,4 @@
-import React, { Components } from 'react';
+import React from 'react';
 import './_coordinates.scss';
 
 const Coordinates = props => {

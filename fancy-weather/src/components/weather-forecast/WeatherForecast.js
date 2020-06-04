@@ -7,28 +7,10 @@ class WeatherForecast extends Component {
       <div className="weather-forecast">
         <div className="weather__item">
           <h1>
-            Tuesday
+            {this.props.dayWeek}
           </h1>
           <div className="item__container">
-            <p className="item__degree">18<span className="degree__elem">°</span></p>
-            <div className="item__image"></div>
-          </div>
-        </div>
-        <div className="weather__item">
-          <h1>
-            Tuesday
-          </h1>
-          <div className="item__container">
-            <p className="item__degree">18<span className="degree__elem">°</span></p>
-            <div className="item__image"></div>
-          </div>
-        </div>
-        <div className="weather__item">
-          <h1>
-            Tuesday
-          </h1>
-          <div className="item__container">
-            <p className="item__degree">18<span className="degree__elem">°</span></p>
+            <p className="item__degree">{Math.round(this.props.temperature)}<span className="degree__elem">°</span></p>
             <div className="item__image"></div>
           </div>
         </div>

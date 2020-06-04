@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./_search.scss";
-import { Context } from '../../../App';
 
 class Search extends Component {
   constructor() {

@@ -3,16 +3,17 @@ import "./_weather-today.scss";
 
 class WeatherToday extends Component {
   render() {
+    const weatherData = this.props.weatherTodayData;
     return (
       <div className="weather-today">
-        <p className="degree">18<span className="degree__elem">°</span></p>
+        <p className="degree">{Math.round(weatherData.temperature)}<span className="degree__elem">°</span></p>
         <div className="weather-info">
           <div className="weather-container">
             <div className="weather-image"></div>
-            <p>overcast</p>
-            <p>feels like: 7</p>
-            <p>wind: 2m/s</p>
-            <p>humidity: 83%</p>
+            <p>{weatherData.description}</p>
+            <p>feels like: {Math.round(weatherData.feelsLike)}</p>
+            <p>wind: {Math.round(weatherData.wind)}m/s</p>
+            <p>humidity: {weatherData.humidity}%</p>
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Loader from '../loader/Loader';
 import MapApp from './map/MapApp';
 import Search from './search/Search';
 

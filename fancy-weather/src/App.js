@@ -21,7 +21,6 @@ class App extends Component {
     const response = await fetch(url);
     const json = await response.json();
     const result = json.results[0];
-    console.log(json)
     const currentCity = result.components.city ? result.components.city :
       result.components.county ? result.components.county :
         result.components.state
