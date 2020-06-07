@@ -10,11 +10,13 @@ class Main extends Component {
   }
 
   async updateWeatherData() {
+    const unitsFormat = this.props.unitsFormat;
     const city = this.props.locationData.currentCity;
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=3ed9d182aca05f9c062f6571836da453&units=metric`
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=3ed9d182aca05f9c062f6571836da453&units=${unitsFormat}`
     const response = await fetch(url);
     const json = await response.json();
     const weatherForecastArray = this.getWeatherForecast(json)
+    console.log(json)
     this.setState({
       weatherForecast: weatherForecastArray,
       weatherToday: {
@@ -28,14 +30,15 @@ class Main extends Component {
   }
 
   getWeatherForecast(json) {
+    const maxDay = Number((json.list[json.list.length - 1].dt_txt).slice(8, 10))
     let prevDay = Number((json.list[0].dt_txt).slice(8, 10))
     let nextDay = prevDay + 1;
     const weatherForecastArray = [[], [], []]
     const dayForecast = 3;
     let indexForecast = 0;
     for (let i = 0; i < json.list.length; i += 1) {
-      if (indexForecast >= dayForecast) break;
       const day = Number((json.list[i].dt_txt).slice(8, 10))
+      if (indexForecast >= dayForecast) break;
       if (day === prevDay) continue;
       if (day === nextDay) weatherForecastArray[indexForecast].push(json.list[i])
       if (day !== prevDay && day !== nextDay) {
@@ -43,12 +46,15 @@ class Main extends Component {
         nextDay += 1;
         indexForecast += 1;
       }
+      if (nextDay > maxDay) {
+        prevDay = 1;
+        nextDay = prevDay + 1;
+      }
     }
     return this.getAverageTemp(weatherForecastArray)
   }
 
   getAverageTemp(array) {
-    console.log(array)
     const avarageTempArray = [];
     for (let i = 0; i < array.length; i += 1) {
       const averageTime = Math.floor(array[i].length / 2) + 1
@@ -58,13 +64,13 @@ class Main extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    if (this.props.locationData.currentCity === prevProps.locationData.currentCity) return
+    if (this.props.locationData.currentCity === prevProps.locationData.currentCity &&
+      this.props.unitsFormat === prevProps.unitsFormat) return
     this.updateWeatherData();
   }
 
   render() {
     if (!this.state) return null
-    console.log(this.state)
     return (
       <div className="main">
         <LocationTitle locationData={this.props.locationData} />
@@ -73,9 +79,10 @@ class Main extends Component {
           {this.state.weatherForecast.map((day, index) => {
             return (
               <WeatherForecast
+                date={day.dt_txt}
                 key={index}
-                dayWeek='friday'
                 temperature={day.main.temp}
+                weatherDescription={day.weather[0].description}
               />
             )
           })}

@@ -5,18 +5,11 @@
 .item__degree {
   font-size: 3rem;
   font-weight: bold;
-}
-
-.item__image {
-  margin-right: 50px;
-  width: 100px;
-  height: 100px;
-
-  background-image: url("../../assets/weather-icon/111.png");
-  background-size: cover;
+  margin-right: 15px;
 }
 
 .item__container {
+  margin-right: 30px;
  display: flex;
  align-items: center;
 }

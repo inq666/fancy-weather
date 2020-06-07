@@ -7,11 +7,11 @@ import RefreshImage from '../../components/buttons/RefreshImage';
 class Control extends Component {
   render() {
     return (
-        <div className="control">
-          <RefreshImage />
-          <ChangeLanguage />
-          <ChangeDegree />
-        </div>
+      <div className="control">
+        <RefreshImage />
+        <ChangeLanguage />
+        <ChangeDegree unitsFormat={this.props.unitsFormat} uptadeUnitsFormat={this.props.uptadeUnitsFormat} />
+      </div>
     )
   }
 }

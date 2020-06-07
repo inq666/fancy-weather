@@ -7,7 +7,7 @@ class Geolocation extends Component {
   render() {
     return (
       <div>
-        <Search uptadeData={this.props.uptadeData} />
+        <Search uptadeWeatherData={this.props.uptadeWeatherData} />
         <MapApp data={this.props.data} />
         }
       </div>

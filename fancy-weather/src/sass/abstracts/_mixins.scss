@@ -4,19 +4,22 @@
   width: 60px;
   height: $control-height;
   margin-right: 8px;
-  padding-top: 10px;
 
   font-weight: 700;
-  font-size: 1.3rem;
-  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  font-family: inherit;
   text-align: center;
   color: $white;
 
   background-color: $button-background;
+  border: none;
   border-radius: 5px;
+  outline: none;
   cursor: pointer;
 
-  transition: background 0.2s linear;
+  transition: background 0.1s linear;
+
+  user-select: none;
 
   &:hover {
     background-color: $button-hover;

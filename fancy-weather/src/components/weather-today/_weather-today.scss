@@ -1,10 +1,8 @@
 @import "../../sass/abstracts/variables";
 
 .weather-today {
-  position: relative;
-
   display: flex;
-
+margin-bottom: 50px;
   .degree {
     font-weight: bold;
     font-size: 20rem;
@@ -15,28 +13,14 @@
     }
   }
 
-  .weather-info {
-    position: absolute;
-    top: -80px;
-    right: 0;
-
+  .weather__container {
+    margin-left: 50px;
     font-weight: bold;
     font-size: 1.8rem;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
-
-    .weather-container {
-      position: relative;
-
-      .weather-image {
-        right: 50px;
-        position: relative;
-        width: 220px;
-        height: 220px;
-
-     /*    background-image: url("../../assets/weather-icon/111.png"); */
-        background-size: cover;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }

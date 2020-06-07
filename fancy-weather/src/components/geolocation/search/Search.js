@@ -17,7 +17,7 @@ class Search extends Component {
 
   handlerPressButton(event) {
     if (event.key === 'Enter' || event.target.tagName === 'BUTTON') {
-      this.props.uptadeData(this.state.inputValue)
+      this.props.uptadeWeatherData(this.state.inputValue)
       this.setState({
         inputValue: '',
       })

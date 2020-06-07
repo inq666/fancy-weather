@@ -11,7 +11,7 @@
     width: 120px;
     margin-right: 0;
     padding: 5px 10px;
-
+    font-size: 1.5rem;
     text-transform: uppercase;
 
     border: none;
@@ -26,8 +26,8 @@
   height: $control-height;
   padding: 0 15px;
 
-  font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-family: inherit;
   color: $white;
 
   background-color: $input-color;
