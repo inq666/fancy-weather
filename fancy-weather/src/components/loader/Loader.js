@@ -5,12 +5,14 @@ import './_loader.scss'
 class App extends Component {
   render() {
     return (
-      <Loader className="loader"
-        type="Oval"
-        color="#ffffff"
-        height={400}
-        width={400}
-      />
+      <div className="loader-window">
+        <Loader className="loader"
+          type="Oval"
+          color="rgb(160, 236, 255)"
+          height={400}
+          width={400}
+        />
+      </div>
     );
   }
 }

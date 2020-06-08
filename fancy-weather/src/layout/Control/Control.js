@@ -8,7 +8,7 @@ class Control extends Component {
   render() {
     return (
       <div className="control">
-        <RefreshImage />
+        <RefreshImage city={this.props.city} />
         <ChangeLanguage />
         <ChangeDegree unitsFormat={this.props.unitsFormat} uptadeUnitsFormat={this.props.uptadeUnitsFormat} />
       </div>

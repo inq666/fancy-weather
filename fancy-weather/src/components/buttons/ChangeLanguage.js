@@ -4,7 +4,7 @@ import "./_change-language.scss"
 class ChangeLanguage extends Component {
   render() {
     return (
-      <button className="change-language">EN</button>
+      <div className="change-language">EN</div>
     )
   }
 }

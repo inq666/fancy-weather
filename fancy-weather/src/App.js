@@ -10,11 +10,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       unitsFormat: 'metric',
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const token = "https://ipinfo.io/json?token=eb5b90bb77d46a";
     const response = await fetch(token);
     const json = await response.json();
@@ -46,6 +47,9 @@ class App extends Component {
       }
     }
     )
+    setTimeout(() => this.setState({
+      loading: false,
+    }), 3000)
   }
 
   uptadeUnitsFormat(format) {
@@ -56,23 +60,29 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <Control unitsFormat={this.state.unitsFormat} uptadeUnitsFormat={this.uptadeUnitsFormat.bind(this)} />
+      <div>
+       {/*  {this.state.loading ? <Loader /> : null} */}
         {this.state.locationData
           ?
-          <div className="content">
-            <Main locationData={this.state.locationData} unitsFormat={this.state.unitsFormat} />
-            <Geolocation uptadeWeatherData={this.uptadeWeatherData.bind(this)} data={{
-              latitude: this.state.latitude,
-              longitude: this.state.longitude
-            }} />
+          <div className="wrapper">
+            <Control
+              city={this.state.locationData.currentCity}
+              unitsFormat={this.state.unitsFormat}
+              uptadeUnitsFormat={this.uptadeUnitsFormat.bind(this)} />
+            <div className="content">
+              <Main locationData={this.state.locationData} unitsFormat={this.state.unitsFormat} />
+              <Geolocation uptadeWeatherData={this.uptadeWeatherData.bind(this)} data={{
+                latitude: this.state.latitude,
+                longitude: this.state.longitude
+              }} />
+            </div>
           </div>
           :
-          <Loader />
+          null
         }
-      </div >
+      </div>
     )
   }
 }
 
-export { App }
+export default App;

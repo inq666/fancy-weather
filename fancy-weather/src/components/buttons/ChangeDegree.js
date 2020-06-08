@@ -20,8 +20,8 @@ class ChangeDegree extends Component {
     this.props.unitsFormat === 'metric' ? styleDiv.push('active-metric') : styleDiv.push('active-imperial');
     return (
       <div className={styleDiv.join(' ')} onClick={(event) => this.changeUnitsFormat(event)}>
-        <button className={this.props.unitsFormat === 'metric' ? 'active-format' : null} id="metric">°C</button>
-        <button className={this.props.unitsFormat === 'imperial' ? 'active-format' : null} id="imperial">°F</button>
+        <div className={this.props.unitsFormat === 'metric' ? 'active-format' : null} id="metric">°C</div>
+        <div className={this.props.unitsFormat === 'imperial' ? 'active-format' : null} id="imperial">°F</div>
       </div>
     )
   }

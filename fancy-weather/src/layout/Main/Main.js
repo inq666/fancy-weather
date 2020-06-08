@@ -16,7 +16,6 @@ class Main extends Component {
     const response = await fetch(url);
     const json = await response.json();
     const weatherForecastArray = this.getWeatherForecast(json)
-    console.log(json)
     this.setState({
       weatherForecast: weatherForecastArray,
       weatherToday: {
@@ -63,7 +62,7 @@ class Main extends Component {
     return avarageTempArray;
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.locationData.currentCity === prevProps.locationData.currentCity &&
       this.props.unitsFormat === prevProps.unitsFormat) return
     this.updateWeatherData();

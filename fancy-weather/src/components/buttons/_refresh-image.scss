@@ -7,12 +7,27 @@
   position: relative;
   .refresh__icon {
     position: absolute;
-    fill: $white;
     top: -4px;
     left: 5px;
+
     transition: transform 1s linear;
+
+    fill: $white;
     &:hover {
       transform: rotate(360deg);
     }
   }
+}
+
+.background-weather {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../assets/background.jpg");
+  background-size: cover;
+  filter: brightness(60%);
 }

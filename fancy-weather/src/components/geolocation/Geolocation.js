@@ -9,7 +9,6 @@ class Geolocation extends Component {
       <div>
         <Search uptadeWeatherData={this.props.uptadeWeatherData} />
         <MapApp data={this.props.data} />
-        }
       </div>
     )
   }

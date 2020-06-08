@@ -13,3 +13,21 @@
  display: flex;
  align-items: center;
 }
+
+.expample-enter {
+  opacity: 0;
+}
+
+.expample-enter.expample-enter-active {
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.expample-leave {
+  opacity: 1;
+}
+
+.expample-leave.expample-leave-active {
+  opacity: 0;
+  transition: opacity 0s linear;
+}
