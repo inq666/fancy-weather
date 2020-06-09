@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       loading: true,
       unitsFormat: 'metric',
+      language: 'en'
     }
   }
 
@@ -58,23 +59,37 @@ class App extends Component {
     })
   }
 
+  uptadeLanguage(language) {
+    this.setState({
+      language: language,
+    })
+  }
+
   render() {
     return (
       <div>
-       {/*  {this.state.loading ? <Loader /> : null} */}
+        {/*  {this.state.loading ? <Loader /> : null} */}
         {this.state.locationData
           ?
           <div className="wrapper">
             <Control
+              uptadeLanguage={this.uptadeLanguage.bind(this)}
+              language={this.state.language}
               city={this.state.locationData.currentCity}
               unitsFormat={this.state.unitsFormat}
               uptadeUnitsFormat={this.uptadeUnitsFormat.bind(this)} />
             <div className="content">
-              <Main locationData={this.state.locationData} unitsFormat={this.state.unitsFormat} />
-              <Geolocation uptadeWeatherData={this.uptadeWeatherData.bind(this)} data={{
-                latitude: this.state.latitude,
-                longitude: this.state.longitude
-              }} />
+              <Main
+                language={this.state.language}
+                locationData={this.state.locationData}
+                unitsFormat={this.state.unitsFormat} />
+              <Geolocation
+                language={this.state.language}
+                uptadeWeatherData={this.uptadeWeatherData.bind(this)}
+                data={{
+                  latitude: this.state.latitude,
+                  longitude: this.state.longitude
+                }} />
             </div>
           </div>
           :

@@ -1,5 +1,52 @@
 @import "../../sass/abstracts/mixins";
 
 .change-language {
+  border-radius: 9px;
+  margin-right: 8px;
+  background: linear-gradient(
+    to bottom,
+    $button-background 0%,
+    $button-background 40%,
+    $active-format 40%,
+    $active-format 60%,
+    $button-background 60%,
+    $button-background 100%
+  );
+  background-size: 100% 167%;
+  background-position: left top;
+  transition: background 0.3s linear;
+  div {
     @include control-button;
+    margin: 0;
+    padding-top: 8px;
+    padding-left: 6px;
+    background-color: #ffffff00;
+    font-size: 1.5em;
+    text-align: left;
+
+    border-radius: 0;
+    &:first-child {
+      border-top-left-radius: 9px;
+      border-top-right-radius: 9px;
+    }
+    &:last-child {
+      border-bottom-left-radius: 9px;
+      border-bottom-right-radius: 9px;
+    }
+  }
+  .active-language:hover {
+    cursor: default;
+    background: none;
+  }
+}
+
+.active-ru {
+  background-position: right center;
+}
+.active-by {
+  background-position: left top;
+}
+
+.active-en {
+  background-position: left bottom;
 }

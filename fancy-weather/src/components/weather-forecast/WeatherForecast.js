@@ -9,7 +9,6 @@ import { FewClouds } from '../weather-icon/FewClouds';
 import { ScatteredClouds } from '../weather-icon/ScatteredClouds';
 import { ClearSky } from '../weather-icon/ClearSky';
 import { LightRain } from '../weather-icon/LightRain';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class WeatherForecast extends Component {
   render() {
@@ -25,12 +24,7 @@ class WeatherForecast extends Component {
           </h1>
 
           <div className="item__container">
-            <ReactCSSTransitionGroup
-              transitionName="expample"
-              transitionEnterTimeout={1000}
-              transitionLeaveTimeout={1000}>
-              <p key={this.props.temperature} className="item__degree">{Math.round(this.props.temperature)}<span className="degree__elem">°</span></p>
-            </ReactCSSTransitionGroup>
+              <p className="item__degree">{Math.round(this.props.temperature)}<span className="degree__elem">°</span></p>
             {
               (/rain/i.test(weatherDescription) && /thunderstorm/i.test(weatherDescription)) ? <ThunderstormWithRain /> :
                 /rain/i.test(weatherDescription) && /light/i.test(weatherDescription) ? <LightRain /> :

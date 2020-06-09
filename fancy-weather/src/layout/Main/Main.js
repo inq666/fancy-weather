@@ -16,6 +16,7 @@ class Main extends Component {
     const response = await fetch(url);
     const json = await response.json();
     const weatherForecastArray = this.getWeatherForecast(json)
+    console.log(json)
     this.setState({
       weatherForecast: weatherForecastArray,
       weatherToday: {
@@ -72,7 +73,7 @@ class Main extends Component {
     if (!this.state) return null
     return (
       <div className="main">
-        <LocationTitle locationData={this.props.locationData} />
+        <LocationTitle language={this.props.language} locationData={this.props.locationData} />
         <WeatherToday weatherTodayData={this.state.weatherToday} />
         <div className="weather__container">
           {this.state.weatherForecast.map((day, index) => {

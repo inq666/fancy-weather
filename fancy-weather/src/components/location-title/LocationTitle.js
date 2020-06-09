@@ -31,11 +31,12 @@ class LocationTitle extends Component {
   }
 
   getLocationDate() {
+    const language = this.props.language;
     this.UTC = new Date(this.state.date.getTime() + this.state.date.getTimezoneOffset() * 60000);
     const locationUTC = this.getUTC();
     this.UTC.setMinutes(this.state.date.getMinutes() + 60 * locationUTC)
-    const dayWeek = (data.days[this.UTC.getDay()]).slice(0, 3);
-    const month = data.months[this.UTC.getMonth()];
+    const dayWeek = data.days[language][this.UTC.getDay()];
+    const month = data.months[language][this.UTC.getMonth()];
     const year = this.UTC.getFullYear();
     const day = this.UTC.getDate();
     return `${dayWeek}, ${day} ${month} ${year}`;

@@ -2,7 +2,8 @@
 @import "../../sass/abstracts/variables";
 
 .change-degree {
-  width: 150px;
+  width: 120px;
+  height: $control-height;
   background: linear-gradient(
     to right,
     $button-background 0%,
@@ -18,7 +19,7 @@
   border-bottom-right-radius: 9px;
   border-bottom-left-radius: 9px;
 
-  transition: background 0.4s linear;
+  transition: background 0.3s linear;
 
   div {
     @include control-button;

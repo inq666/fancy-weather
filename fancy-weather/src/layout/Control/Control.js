@@ -8,8 +8,8 @@ class Control extends Component {
   render() {
     return (
       <div className="control">
+        <ChangeLanguage uptadeLanguage={this.props.uptadeLanguage} language={this.props.language} />
         <RefreshImage city={this.props.city} />
-        <ChangeLanguage />
         <ChangeDegree unitsFormat={this.props.unitsFormat} uptadeUnitsFormat={this.props.uptadeUnitsFormat} />
       </div>
     )

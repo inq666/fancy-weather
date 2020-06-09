@@ -10,12 +10,11 @@
     top: -4px;
     left: 5px;
 
-    transition: transform 1s linear;
-
     fill: $white;
-    &:hover {
-      transform: rotate(360deg);
-    }
+  }
+
+  .show-animation {
+    animation: loading-picture 1s infinite linear;
   }
 }
 
@@ -31,3 +30,31 @@
   background-size: cover;
   filter: brightness(60%);
 }
+
+.change-background-enter {
+  opacity: 1;
+}
+
+.change-background-enter.change-background-enter-active {
+  opacity: 1;
+  transition: opacity 0s linear;
+}
+
+.change-background-leave {
+  opacity: 1;
+}
+
+.change-background-leave.change-background-leave-active {
+  opacity: 0;
+  transition: opacity 1s linear;
+}
+
+@keyframes loading-picture {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

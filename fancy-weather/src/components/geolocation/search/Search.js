@@ -25,12 +25,26 @@ class Search extends Component {
   }
 
   render() {
-    return (
-      <div className="search">
-        <input className="search__input" value={this.state.inputValue} placeholder="Search city" onKeyPress={(event) => this.handlerPressButton(event)} onChange={this.handlerChange.bind(this)}></input>
-        <button className="search__button" onClick={(event) => this.handlerPressButton(event)}>search</button>
-      </div>
-    )
+    const language = this.props.language
+    let placeholderTranslate = '';
+    let searchTranslate = '';
+    if (language === 'en') {
+      placeholderTranslate = 'Search city...';
+      searchTranslate = 'Search'
+    } else if (language === 'ru') {
+      placeholderTranslate = 'Найти город...';
+      searchTranslate = 'Найти'
+    } else {
+      placeholderTranslate = 'Знайсці горад...';
+      searchTranslate = 'Знайсці'
+    }
+    if (this)
+      return (
+        <div className="search">
+          <input className="search__input" value={this.state.inputValue} placeholder={placeholderTranslate} onKeyPress={(event) => this.handlerPressButton(event)} onChange={this.handlerChange.bind(this)}></input>
+          <button className="search__button" onClick={(event) => this.handlerPressButton(event)}>{searchTranslate.toUpperCase()}</button>
+        </div>
+      )
   }
 }
 

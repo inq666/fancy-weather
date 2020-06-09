@@ -3,31 +3,16 @@
 }
 
 .item__degree {
+  min-width: 90px;
   font-size: 3rem;
   font-weight: bold;
   margin-right: 15px;
 }
 
 .item__container {
+  min-width: 200px;
   margin-right: 30px;
  display: flex;
  align-items: center;
 }
 
-.expample-enter {
-  opacity: 0;
-}
-
-.expample-enter.expample-enter-active {
-  opacity: 1;
-  transition: opacity 1s linear;
-}
-
-.expample-leave {
-  opacity: 1;
-}
-
-.expample-leave.expample-leave-active {
-  opacity: 0;
-  transition: opacity 0s linear;
-}

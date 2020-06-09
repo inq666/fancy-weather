@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import Coordinates from './Coordinates';
 import './_mapApp.scss';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class MapApp extends Component {
   render() {
@@ -12,15 +12,24 @@ class MapApp extends Component {
     }
     const data = this.props.data;
     return (
-        <YMaps>
-          <Map className="mask" style={mapStyle} state={{
-            center: [data.latitude.coordinates, data.longitude.coordinates],
-            zoom: 10,
+
+      <div className="newMap">
+        <ReactCSSTransitionGroup
+          transitionName="change-map"
+          transitionEnterTimeout={2000}
+          transitionLeaveTimeout={1000}>
+          <YMaps key={this.props.language} query={{
+            lang: this.props.language === 'by' ? 'ru' : this.props.language,
           }}>
-            <Placemark geometry={[data.latitude.coordinates, data.longitude.coordinates]}></Placemark>
-          </Map>
-          <Coordinates latitude={data.latitude.coordinatesName} longitude={data.longitude.coordinatesName} />
-        </YMaps>
+            <Map className="mask" style={mapStyle} state={{
+              center: [data.latitude.coordinates, data.longitude.coordinates],
+              zoom: 10,
+            }}>
+              <Placemark geometry={[data.latitude.coordinates, data.longitude.coordinates]}></Placemark>
+            </Map>
+          </YMaps>
+        </ReactCSSTransitionGroup>
+      </div >
     )
   }
 }
