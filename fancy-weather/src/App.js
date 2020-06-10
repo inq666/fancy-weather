@@ -4,6 +4,8 @@ import Loader from './components/loader/Loader';
 import Control from './layout/Control/Control';
 import Main from './layout/Main/Main';
 import Geolocation from './components/geolocation/Geolocation';
+import InvalidRequest from './components/invalidRequest/InvalidRequest';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class App extends Component {
 
@@ -12,7 +14,8 @@ class App extends Component {
     this.state = {
       loading: true,
       unitsFormat: JSON.parse(localStorage.getItem('unitsFormat')) || 'metric',
-      language: JSON.parse(localStorage.getItem('appLanguage')) || 'en'
+      language: JSON.parse(localStorage.getItem('appLanguage')) || 'en',
+      showModalWindow: false,
     }
   }
 
@@ -34,7 +37,14 @@ class App extends Component {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=en`;
     const response = await fetch(url);
     const json = await response.json();
+    if (json.results.length < 1) {
+      this.setState({
+        showModalWindow: true,
+      })
+      return;
+    }
     const result = json.results[0];
+    console.log(json)
     const currentCity = result.components.city ? result.components.city :
       result.components.county ? result.components.county :
         result.components.state
@@ -66,6 +76,13 @@ class App extends Component {
     })
   }
 
+  closeModalWindow() {
+    console.log('close')
+    this.setState({
+      showModalWindow: false,
+    })
+  }
+
   async getCityName(cityName, language) {
     const city = this.state.locationData ? this.state.locationData.currentCity : cityName
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=${language}`;
@@ -89,6 +106,12 @@ class App extends Component {
   render() {
     return (
       <div>
+        <ReactCSSTransitionGroup
+          transitionName="show-modal-window"
+          transitionEnterTimeout={1000}
+          transitionLeaveTimeout={1000}>
+          {this.state.showModalWindow ? <InvalidRequest closeModalWindow={this.closeModalWindow.bind(this)} /> : null}
+        </ReactCSSTransitionGroup>
         {/*  {this.state.loading ? <Loader /> : null} */}
         {this.state.locationData
           ?

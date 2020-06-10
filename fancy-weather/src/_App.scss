@@ -39,3 +39,21 @@ p {
   display: flex;
   justify-content: space-between;
 }
+
+.show-modal-window-enter {
+  opacity: 0;
+}
+
+.show-modal-window-enter.show-modal-window-enter-active {
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.show-modal-window-leave {
+  opacity: 1;
+}
+
+.show-modal-window-leave.show-modal-window-leave-active {
+  opacity: 0;
+  transition: opacity 1s linear;
+}
