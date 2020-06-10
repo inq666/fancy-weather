@@ -9,13 +9,14 @@ import { FewClouds } from '../weather-icon/FewClouds';
 import { ScatteredClouds } from '../weather-icon/ScatteredClouds';
 import { ClearSky } from '../weather-icon/ClearSky';
 import { LightRain } from '../weather-icon/LightRain';
+import { translateWeather } from '../../data/translateWeather';
 
 class WeatherForecast extends Component {
   render() {
-    const weatherDescription = this.props.weatherDescription
     const date = new Date(this.props.date).getDay();
-    const dayWeek = data.days[date]
-
+    const dayWeek = data.days[this.props.language].full[date]
+    const id = Number(this.props.dataId)
+    const weatherDescription = translateWeather['en'][id]
     return (
       <div className="weather-forecast">
         <div className="weather__item">
@@ -24,7 +25,7 @@ class WeatherForecast extends Component {
           </h1>
 
           <div className="item__container">
-              <p className="item__degree">{Math.round(this.props.temperature)}<span className="degree__elem">°</span></p>
+            <p className="item__degree">{Math.round(this.props.temperature)}<span className="degree__elem">°</span></p>
             {
               (/rain/i.test(weatherDescription) && /thunderstorm/i.test(weatherDescription)) ? <ThunderstormWithRain /> :
                 /rain/i.test(weatherDescription) && /light/i.test(weatherDescription) ? <LightRain /> :

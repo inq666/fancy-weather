@@ -3,6 +3,7 @@ import './_main.scss';
 import WeatherForecast from '../../components/weather-forecast/WeatherForecast';
 import LocationTitle from '../../components/location-title/LocationTitle';
 import WeatherToday from '../../components/weather-today/WeatherToday';
+import { translateWeather } from '../../data/translateWeather'
 
 class Main extends Component {
   componentDidMount() {
@@ -12,19 +13,20 @@ class Main extends Component {
   async updateWeatherData() {
     const unitsFormat = this.props.unitsFormat;
     const city = this.props.locationData.currentCity;
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=3ed9d182aca05f9c062f6571836da453&units=${unitsFormat}`
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=3ed9d182aca05f9c062f6571836da453&units=${unitsFormat}&lang=${this.props.language}`
     const response = await fetch(url);
     const json = await response.json();
     const weatherForecastArray = this.getWeatherForecast(json)
-    console.log(json)
+    const result = json.list[0];
     this.setState({
       weatherForecast: weatherForecastArray,
       weatherToday: {
-        temperature: json.list[0].main.temp,
-        description: json.list[0].weather[0].description,
-        feelsLike: json.list[0].main.feels_like,
-        wind: json.list[0].wind.speed,
-        humidity: json.list[0].main.humidity,
+        dataId: result.weather[0].id,
+        temperature: result.main.temp,
+        description: translateWeather[this.props.language][result.weather[0].id],
+        feelsLike: result.main.feels_like,
+        wind: result.wind.speed,
+        humidity: result.main.humidity,
       }
     })
   }
@@ -73,16 +75,17 @@ class Main extends Component {
     if (!this.state) return null
     return (
       <div className="main">
-        <LocationTitle language={this.props.language} locationData={this.props.locationData} />
-        <WeatherToday weatherTodayData={this.state.weatherToday} />
+        <LocationTitle cityName={this.props.cityName} language={this.props.language} locationData={this.props.locationData} />
+        <WeatherToday language={this.props.language} weatherTodayData={this.state.weatherToday} />
         <div className="weather__container">
           {this.state.weatherForecast.map((day, index) => {
             return (
               <WeatherForecast
+                language={this.props.language}
                 date={day.dt_txt}
                 key={index}
                 temperature={day.main.temp}
-                weatherDescription={day.weather[0].description}
+                dataId={day.weather[0].id}
               />
             )
           })}

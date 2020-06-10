@@ -8,9 +8,28 @@ import { FewClouds } from '../weather-icon/FewClouds';
 import { ScatteredClouds } from '../weather-icon/ScatteredClouds';
 import { ClearSky } from '../weather-icon/ClearSky';
 import { LightRain } from '../weather-icon/LightRain';
+import { translateWeather } from '../../data/translateWeather';
 
 class WeatherToday extends Component {
   render() {
+    const dataTranslate = {
+      'ru': {
+        feelsLike: 'Ощущается как:',
+        wind: 'Ветер:',
+        humidity: 'Влажность:',
+      },
+      'en': {
+        feelsLike: 'feels Like:',
+        wind: 'Wind:',
+        humidity: 'Humidity:',
+      },
+      'be': {
+        feelsLike: 'Адчуваецца як:',
+        wind: 'Вецер:',
+        humidity: 'Вільготнасць:',
+      }
+    }
+    const translate = dataTranslate[this.props.language];
     const styleDiv = {
       transform: "scale(1.8)",
       display: "inline-block",
@@ -18,8 +37,10 @@ class WeatherToday extends Component {
       width: "200px",
       textAlign: "center"
     }
+
     const weatherData = this.props.weatherTodayData;
-    const weatherDescription = weatherData.description
+    const id = Number(weatherData.dataId)
+    const weatherDescription = translateWeather[this.props.language][id]
     return (
       <div className="weather-today">
         <p className="degree">{Math.round(weatherData.temperature)}<span className="degree__elem">°</span></p>
@@ -37,9 +58,9 @@ class WeatherToday extends Component {
           </div>
           <div className="weather__info">
             <p>{weatherDescription}</p>
-            <p>feels like: {Math.round(weatherData.feelsLike)}</p>
-            <p>wind: {Math.round(weatherData.wind)}m/s</p>
-            <p>humidity: {weatherData.humidity}%</p>
+            <p>{`${translate.feelsLike} ${Math.round(weatherData.feelsLike)}°`}</p>
+            <p>{`${translate.wind} ${Math.round(weatherData.wind)}M/S`}</p>
+            <p>{`${translate.humidity} ${weatherData.humidity}%`}</p>
           </div>
         </div>
       </div>

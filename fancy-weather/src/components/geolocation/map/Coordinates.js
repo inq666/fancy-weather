@@ -15,7 +15,6 @@ const Coordinates = props => {
     latitudeTranslate = 'Шырата';
     longitudeTranslate = 'Даўгата'
   }
-  console.log(props.language)
   return (
     <div className="geometry">
       <p>{`${latitudeTranslate}: ${props.latitude}`}</p>

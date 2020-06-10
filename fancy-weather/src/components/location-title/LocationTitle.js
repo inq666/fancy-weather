@@ -35,7 +35,7 @@ class LocationTitle extends Component {
     this.UTC = new Date(this.state.date.getTime() + this.state.date.getTimezoneOffset() * 60000);
     const locationUTC = this.getUTC();
     this.UTC.setMinutes(this.state.date.getMinutes() + 60 * locationUTC)
-    const dayWeek = data.days[language][this.UTC.getDay()];
+    const dayWeek = data.days[language].short[this.UTC.getDay()];
     const month = data.months[language][this.UTC.getMonth()];
     const year = this.UTC.getFullYear();
     const day = this.UTC.getDate();
@@ -64,7 +64,7 @@ class LocationTitle extends Component {
 
     return (
       <div>
-        <h1 className="location-city">{`${this.props.locationData.currentCity}, ${this.props.locationData.currentCountry}`}</h1>
+        <h1 className="location-city">{this.props.cityName}</h1>
         <span className="location-date">{`${date} ${time}`}</span>
       </div>
     )

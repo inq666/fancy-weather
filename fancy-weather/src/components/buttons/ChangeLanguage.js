@@ -6,7 +6,7 @@ class ChangeLanguage extends Component {
     super(props);
     this.state = {
       language: this.props.language,
-      languageButtons: ['en', 'ru', 'by'],
+      languageButtons: ['en', 'ru', 'be'],
     }
   }
 
@@ -18,7 +18,7 @@ class ChangeLanguage extends Component {
     } else if (target === 'ru') {
       selectedLanguage = 'ru';
     } else {
-      selectedLanguage = 'by';
+      selectedLanguage = 'be';
     }
     this.setState({
       language: selectedLanguage,
