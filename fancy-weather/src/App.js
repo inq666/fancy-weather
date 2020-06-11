@@ -28,7 +28,6 @@ class App extends Component {
     const response = await fetch(token);
     const json = await response.json();
     const city = json.city;
-    console.log(json)
     this.uptadeWeatherData(city)
     this.getCityName(city, this.state.language)
   }
@@ -44,7 +43,6 @@ class App extends Component {
       return;
     }
     const result = json.results[0];
-    console.log(json)
     const currentCity = result.components.city ? result.components.city :
       result.components.county ? result.components.county :
         result.components.state
@@ -77,7 +75,6 @@ class App extends Component {
   }
 
   closeModalWindow() {
-    console.log('close')
     this.setState({
       showModalWindow: false,
     })
@@ -112,7 +109,7 @@ class App extends Component {
           transitionLeaveTimeout={1000}>
           {this.state.showModalWindow ? <InvalidRequest closeModalWindow={this.closeModalWindow.bind(this)} /> : null}
         </ReactCSSTransitionGroup>
-        {/*  {this.state.loading ? <Loader /> : null} */}
+        {this.state.loading ? <Loader /> : null}
         {this.state.locationData
           ?
           <div className="wrapper">
@@ -121,6 +118,7 @@ class App extends Component {
               language={this.state.language}
               city={this.state.locationData.currentCity}
               unitsFormat={this.state.unitsFormat}
+              locationUTC={this.state.locationData.locationUTC}
               uptadeUnitsFormat={this.uptadeUnitsFormat.bind(this)} />
             <div className="content">
               <Main

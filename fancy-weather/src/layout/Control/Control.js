@@ -9,7 +9,7 @@ class Control extends Component {
     return (
       <div className="control">
         <ChangeLanguage uptadeLanguage={this.props.uptadeLanguage} language={this.props.language} />
-        <RefreshImage city={this.props.city} />
+        <RefreshImage locationUTC ={this.props.locationUTC} city={this.props.city} />
         <ChangeDegree unitsFormat={this.props.unitsFormat} uptadeUnitsFormat={this.props.uptadeUnitsFormat} />
       </div>
     )

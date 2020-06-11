@@ -59,7 +59,7 @@ class WeatherToday extends Component {
           <div className="weather__info">
             <p>{weatherDescription}</p>
             <p>{`${translate.feelsLike} ${Math.round(weatherData.feelsLike)}°`}</p>
-            <p>{`${translate.wind} ${Math.round(weatherData.wind)}M/S`}</p>
+            <p>{`${translate.wind} ${Math.round(weatherData.wind)}${this.props.language === 'en' ? 'M/S' : 'M/C'}`}</p>
             <p>{`${translate.humidity} ${weatherData.humidity}%`}</p>
           </div>
         </div>
