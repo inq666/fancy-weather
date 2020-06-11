@@ -1,26 +1,27 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './_coordinates.scss';
 
-const Coordinates = props => {
-  const language = props.language
+const Coordinates = (props) => {
+  const { language, latitude, longitude } = props;
   let latitudeTranslate = '';
   let longitudeTranslate = '';
   if (language === 'en') {
     latitudeTranslate = 'Latitude';
-    longitudeTranslate = 'Longitude'
+    longitudeTranslate = 'Longitude';
   } else if (language === 'ru') {
     latitudeTranslate = 'Широта';
-    longitudeTranslate = 'Долгота'
+    longitudeTranslate = 'Долгота';
   } else {
     latitudeTranslate = 'Шырата';
-    longitudeTranslate = 'Даўгата'
+    longitudeTranslate = 'Даўгата';
   }
   return (
     <div className="geometry">
-      <p>{`${latitudeTranslate}: ${props.latitude}`}</p>
-      <p>{`${longitudeTranslate}: ${props.longitude}`}</p>
+      <p>{`${latitudeTranslate}: ${latitude}`}</p>
+      <p>{`${longitudeTranslate}: ${longitude}`}</p>
     </div>
-  )
-}
+  );
+};
 
 export default Coordinates;

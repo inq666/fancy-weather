@@ -2,7 +2,7 @@
 
 .weather-today {
   display: flex;
-margin-bottom: 50px;
+  margin-bottom: 50px;
   .degree {
     min-width: 480px;
     font-weight: bold;
@@ -24,4 +24,11 @@ margin-bottom: 50px;
     flex-direction: column;
     justify-content: space-around;
   }
+}
+.icon__container {
+  transform: scale(1.8);
+  display: inline-block;
+  height: 100px;
+  width: 200px;
+  text-align: center;
 }

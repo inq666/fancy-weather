@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Loader from 'react-loader-spinner';
-import './_loader.scss'
+import './_loader.scss';
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <div className="loader-window">
-        <Loader className="loader"
+        <Loader
+          className="loader"
           type="Oval"
           color="rgb(160, 236, 255)"
           height={400}

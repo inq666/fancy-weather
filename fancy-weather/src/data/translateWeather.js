@@ -1,5 +1,5 @@
-export const translateWeather = {
-  'be': {
+const translateWeather = {
+  be: {
     200: 'навальніца з невялікім дажджом',
     201: 'навальніца з дажджом',
     202: 'навальніца з моцным дажджом',
@@ -55,7 +55,7 @@ export const translateWeather = {
     803: 'пераменная воблачнасць',
     804: 'пахмурна',
   },
-  'ru': {
+  ru: {
     200: 'гроза с небольшим дождем',
     201: 'гроза с дождем',
     202: 'гроза с проливным дождем',
@@ -111,7 +111,7 @@ export const translateWeather = {
     803: 'переменная облачность',
     804: 'пасмурно',
   },
-  'en': {
+  en: {
     200: 'thunderstorm with light rain',
     201: 'thunderstorm with rain',
     202: 'thunderstorm with heavy rain',
@@ -167,4 +167,6 @@ export const translateWeather = {
     803: 'broken clouds',
     804: 'overcast clouds',
   },
-}
+};
+
+export default translateWeather;

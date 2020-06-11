@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './_App.scss';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Loader from './components/loader/Loader';
 import Control from './layout/Control/Control';
 import Main from './layout/Main/Main';
 import Geolocation from './components/geolocation/Geolocation';
 import InvalidRequest from './components/invalidRequest/InvalidRequest';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,20 +15,45 @@ class App extends Component {
       unitsFormat: JSON.parse(localStorage.getItem('unitsFormat')) || 'metric',
       language: JSON.parse(localStorage.getItem('appLanguage')) || 'en',
       showModalWindow: false,
-    }
+    };
+    this.closeModalWindow = this.closeModalWindow.bind(this);
+    this.uptadeLanguage = this.uptadeLanguage.bind(this);
+    this.uptadeUnitsFormat = this.uptadeUnitsFormat.bind(this);
+    this.uptadeWeatherData = this.uptadeWeatherData.bind(this);
   }
 
   async componentDidMount() {
+    const { language, unitsFormat } = this.state;
     window.addEventListener('unload', () => {
-      localStorage.setItem('unitsFormat', JSON.stringify(this.state.unitsFormat));
-      localStorage.setItem('appLanguage', JSON.stringify(this.state.language));
-    })
-    const token = "https://ipinfo.io/json?token=eb5b90bb77d46a";
+      localStorage.setItem('unitsFormat', JSON.stringify(unitsFormat));
+      localStorage.setItem('appLanguage', JSON.stringify(language));
+    });
+    const token = 'https://ipinfo.io/json?token=eb5b90bb77d46a';
     const response = await fetch(token);
     const json = await response.json();
-    const city = json.city;
-    this.uptadeWeatherData(city)
-    this.getCityName(city, this.state.language)
+    const { city } = json;
+    this.uptadeWeatherData(city);
+    this.getCityName(city, language);
+  }
+
+  async getCityName(cityName, language) {
+    const { locationData } = this.state;
+    const city = locationData ? locationData.currentCity : cityName;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=${language}`;
+    const response = await fetch(url);
+    const json = await response.json();
+    const result = json.results[0];
+    let englishCityName = '';
+    if (result.components.city) {
+      englishCityName = result.components.city;
+    } else if (result.components.county) {
+      englishCityName = result.components.county;
+    } else {
+      englishCityName = result.components.state;
+    }
+    this.setState({
+      englishCityName: `${englishCityName}, ${result.components.country}`,
+    });
   }
 
   async uptadeWeatherData(city) {
@@ -39,107 +63,108 @@ class App extends Component {
     if (json.results.length < 1) {
       this.setState({
         showModalWindow: true,
-      })
+      });
       return;
     }
     const result = json.results[0];
-    const currentCity = result.components.city ? result.components.city :
-      result.components.county ? result.components.county :
-        result.components.state
+    let currentCity = '';
+    if (result.components.city) {
+      currentCity = result.components.city;
+    } else if (result.components.county) {
+      currentCity = result.components.county;
+    } else {
+      currentCity = result.components.state;
+    }
+
     this.setState({
       locationData: {
         currentCountry: result.components.country,
-        currentCity: currentCity,
+        currentCity,
         locationUTC: result.annotations.timezone.offset_string,
       },
       latitude: {
         coordinates: result.geometry.lat,
-        coordinatesName: result.annotations.DMS.lat
+        coordinatesName: result.annotations.DMS.lat,
       },
       longitude: {
         coordinates: result.geometry.lng,
-        coordinatesName: result.annotations.DMS.lng
-      }
-    }
-    )
-    this.getCityName(city, this.state.language)
+        coordinatesName: result.annotations.DMS.lng,
+      },
+    });
+    const { language } = this.state;
+    this.getCityName(city, language);
     setTimeout(() => this.setState({
       loading: false,
-    }), 3000)
+    }), 3000);
   }
 
   uptadeUnitsFormat(format) {
     this.setState({
       unitsFormat: format,
-    })
+    });
   }
 
   closeModalWindow() {
     this.setState({
       showModalWindow: false,
-    })
-  }
-
-  async getCityName(cityName, language) {
-    const city = this.state.locationData ? this.state.locationData.currentCity : cityName
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=${language}`;
-    const response = await fetch(url);
-    const json = await response.json();
-    const result = json.results[0];
-    const englishCityName = result.components.city ? result.components.city :
-      result.components.county ? result.components.county :
-        result.components.state
-    this.setState({
-      englishCityName: `${englishCityName}, ${result.components.country}`,
-    })
+    });
   }
 
   uptadeLanguage(language) {
-    this.getCityName(this.state.locationData.currentCity, language)
+    const { locationData } = this.state;
+    this.getCityName(locationData.currentCity, language);
     this.setState({
-      language: language,
-    })
+      language,
+    });
   }
+
   render() {
+    const {
+      loading, unitsFormat, language, showModalWindow,
+      locationData, englishCityName, latitude, longitude,
+    } = this.state;
     return (
       <div>
         <ReactCSSTransitionGroup
           transitionName="show-modal-window"
           transitionEnterTimeout={1000}
-          transitionLeaveTimeout={1000}>
-          {this.state.showModalWindow ? <InvalidRequest closeModalWindow={this.closeModalWindow.bind(this)} /> : null}
+          transitionLeaveTimeout={1000}
+        >
+          {showModalWindow ? <InvalidRequest closeModalWindow={this.closeModalWindow} /> : null}
         </ReactCSSTransitionGroup>
-        {this.state.loading ? <Loader /> : null}
-        {this.state.locationData
-          ?
-          <div className="wrapper">
-            <Control
-              uptadeLanguage={this.uptadeLanguage.bind(this)}
-              language={this.state.language}
-              city={this.state.locationData.currentCity}
-              unitsFormat={this.state.unitsFormat}
-              locationUTC={this.state.locationData.locationUTC}
-              uptadeUnitsFormat={this.uptadeUnitsFormat.bind(this)} />
-            <div className="content">
-              <Main
-                cityName={this.state.englishCityName}
-                language={this.state.language}
-                locationData={this.state.locationData}
-                unitsFormat={this.state.unitsFormat} />
-              <Geolocation
-                language={this.state.language}
-                uptadeWeatherData={this.uptadeWeatherData.bind(this)}
-                data={{
-                  latitude: this.state.latitude,
-                  longitude: this.state.longitude
-                }} />
+        {loading ? <Loader /> : null}
+        {locationData
+          ? (
+            <div className="wrapper">
+              <Control
+                uptadeLanguage={this.uptadeLanguage}
+                language={language}
+                city={locationData.currentCity}
+                unitsFormat={unitsFormat}
+                locationUTC={locationData.locationUTC}
+                uptadeUnitsFormat={this.uptadeUnitsFormat}
+              />
+              <div className="content">
+                <Main
+                  cityName={englishCityName}
+                  language={language}
+                  locationData={locationData}
+                  unitsFormat={unitsFormat}
+                />
+                <Geolocation
+                  language={language}
+                  uptadeWeatherData={this.uptadeWeatherData}
+                  data={{
+                    latitude,
+                    longitude,
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          :
-          null
-        }
+          )
+          : null}
       </div>
-    )
+    );
   }
 }
 

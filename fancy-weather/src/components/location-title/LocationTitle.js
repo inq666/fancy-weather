@@ -1,28 +1,24 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import { data } from '../../data/data';
-import "./_location-title.scss";
+import data from '../../data/data';
+import './_location-title.scss';
 
 class LocationTitle extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: new Date(),
-    }
+    };
   }
 
   componentDidMount() {
     this.timerId = setInterval(() => this.tick(), 1000);
   }
 
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
   getUTC() {
-    const mathSign = (this.props.locationData.locationUTC).slice(0, 1);
-    const locationUTC = (this.props.locationData.locationUTC).slice(1, 3);
+    const { locationData } = this.props;
+    const mathSign = (locationData.locationUTC).slice(0, 1);
+    const locationUTC = (locationData.locationUTC).slice(1, 3);
     const GMT = 0;
     if (mathSign === '+') {
       return GMT + locationUTC;
@@ -31,10 +27,11 @@ class LocationTitle extends Component {
   }
 
   getLocationDate() {
-    const language = this.props.language;
-    this.UTC = new Date(this.state.date.getTime() + this.state.date.getTimezoneOffset() * 60000);
+    const { language } = this.props;
+    const { date } = this.state;
+    this.UTC = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     const locationUTC = this.getUTC();
-    this.UTC.setMinutes(this.state.date.getMinutes() + 60 * locationUTC)
+    this.UTC.setMinutes(date.getMinutes() + 60 * locationUTC);
     const dayWeek = data.days[language].short[this.UTC.getDay()];
     const month = data.months[language][this.UTC.getMonth()];
     const year = this.UTC.getFullYear();
@@ -58,16 +55,22 @@ class LocationTitle extends Component {
     return `${hour}:${min}:${sec}`;
   }
 
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
   render() {
     const date = this.getLocationDate();
     const time = this.getLocationTime();
-
+    const { cityName } = this.props;
     return (
       <div>
-        <h1 className="location-city">{this.props.cityName}</h1>
+        <h1 className="location-city">{cityName}</h1>
         <span className="location-date">{`${date} ${time}`}</span>
       </div>
-    )
+    );
   }
 }
 

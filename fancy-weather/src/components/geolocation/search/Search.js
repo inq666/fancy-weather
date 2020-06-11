@@ -1,50 +1,53 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import "./_search.scss";
+import './_search.scss';
 
 class Search extends Component {
   constructor() {
     super();
     this.state = {
       inputValue: '',
-    }
+    };
   }
 
   handlerChange(event) {
     this.setState({
       inputValue: event.target.value,
-    })
+    });
   }
 
   handlerPressButton(event) {
+    const { uptadeWeatherData } = this.props;
+    const { inputValue } = this.state;
     if (event.key === 'Enter' || event.target.tagName === 'BUTTON') {
-      this.props.uptadeWeatherData(this.state.inputValue)
+      uptadeWeatherData(inputValue);
       this.setState({
         inputValue: '',
-      })
+      });
     }
   }
 
   render() {
-    const language = this.props.language
+    const { language } = this.props;
+    const { inputValue } = this.state;
     let placeholderTranslate = '';
     let searchTranslate = '';
     if (language === 'en') {
       placeholderTranslate = 'Search city...';
-      searchTranslate = 'Search'
+      searchTranslate = 'Search';
     } else if (language === 'ru') {
       placeholderTranslate = 'Найти город...';
-      searchTranslate = 'Найти'
+      searchTranslate = 'Найти';
     } else {
       placeholderTranslate = 'Знайсці горад...';
-      searchTranslate = 'Знайсці'
+      searchTranslate = 'Знайсці';
     }
-    if (this)
-      return (
-        <div className="search">
-          <input className="search__input" value={this.state.inputValue} placeholder={placeholderTranslate} onKeyPress={(event) => this.handlerPressButton(event)} onChange={this.handlerChange.bind(this)}></input>
-          <button className="search__button" onClick={(event) => this.handlerPressButton(event)}>{searchTranslate.toUpperCase()}</button>
-        </div>
-      )
+    return (
+      <div className="search">
+        <input className="search__input" value={inputValue} placeholder={placeholderTranslate} onKeyPress={(event) => this.handlerPressButton(event)} onChange={this.handlerChange.bind(this)} />
+        <button className="search__button" type="submit" onClick={(event) => this.handlerPressButton(event)}>{searchTranslate.toUpperCase()}</button>
+      </div>
+    );
   }
 }
 
