@@ -34,7 +34,6 @@ class App extends Component {
     const response = await fetch(token);
     const json = await response.json();
     const { city } = json;
-    console.log(token)
     this.uptadeWeatherData(city);
     this.getCityName(city, language);
   }
