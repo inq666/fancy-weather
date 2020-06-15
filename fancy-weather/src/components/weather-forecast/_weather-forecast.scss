@@ -4,15 +4,15 @@
 
 .item__degree {
   min-width: 90px;
-  font-size: 3rem;
-  font-weight: bold;
   margin-right: 15px;
+
+  font-weight: bold;
+  font-size: 3rem;
 }
 
 .item__container {
+  display: flex;
+  align-items: center;
   min-width: 200px;
   margin-right: 30px;
- display: flex;
- align-items: center;
 }
-

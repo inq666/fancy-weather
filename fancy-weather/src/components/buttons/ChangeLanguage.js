@@ -15,15 +15,7 @@ class ChangeLanguage extends Component {
   }
 
   handlerChangeLanguage(event) {
-    let selectedLanguage = '';
-    const target = event.target.id;
-    if (target === 'en') {
-      selectedLanguage = 'en';
-    } else if (target === 'ru') {
-      selectedLanguage = 'ru';
-    } else {
-      selectedLanguage = 'be';
-    }
+    const selectedLanguage = event.target.id;
     this.setState({
       language: selectedLanguage,
     });
@@ -34,9 +26,9 @@ class ChangeLanguage extends Component {
   render() {
     const { language, languageButtons } = this.state;
     const styleDiv = `change-language active-${language}`;
-    const buttons = languageButtons.map((languageButton) => (
-      <div className={language === languageButton ? 'active-language' : ''} key={language} id={language}>
-        {language.toUpperCase()}
+    const buttons = languageButtons.map((buttonName) => (
+      <div className={language === buttonName ? 'active-language' : ''} key={buttonName} id={buttonName}>
+        {buttonName.toUpperCase()}
       </div>
     ));
     return (

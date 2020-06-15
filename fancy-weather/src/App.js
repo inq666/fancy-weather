@@ -10,6 +10,8 @@ import InvalidRequest from './components/invalidRequest/InvalidRequest';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.locationKey = process.env.REACT_APP_LOCATION_KEY;
+    this.geolocationKey = process.env.REACT_APP_GEOLOCATION_KEY;
     this.state = {
       loading: true,
       unitsFormat: JSON.parse(localStorage.getItem('unitsFormat')) || 'metric',
@@ -28,10 +30,11 @@ class App extends Component {
       localStorage.setItem('unitsFormat', JSON.stringify(unitsFormat));
       localStorage.setItem('appLanguage', JSON.stringify(language));
     });
-    const token = 'https://ipinfo.io/json?token=eb5b90bb77d46a';
+    const token = `https://ipinfo.io/json?token=${this.locationKey}`;
     const response = await fetch(token);
     const json = await response.json();
     const { city } = json;
+    console.log(token)
     this.uptadeWeatherData(city);
     this.getCityName(city, language);
   }
@@ -39,7 +42,7 @@ class App extends Component {
   async getCityName(cityName, language) {
     const { locationData } = this.state;
     const city = locationData ? locationData.currentCity : cityName;
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=${language}`;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${this.geolocationKey}&limit=1&language=${language}`;
     const response = await fetch(url);
     const json = await response.json();
     const result = json.results[0];
@@ -57,7 +60,7 @@ class App extends Component {
   }
 
   async uptadeWeatherData(city) {
-    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=4207df84c91e45708293aaa3ba8386a0&limit=1&language=en`;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${this.geolocationKey}&limit=1&language=en`;
     const response = await fetch(url);
     const json = await response.json();
     if (json.results.length < 1) {

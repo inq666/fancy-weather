@@ -8,6 +8,11 @@ import WeatherToday from '../../components/weather-today/WeatherToday';
 import translateWeather from '../../data/translateWeather';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.weatherKey = process.env.REACT_APP_WEATHER_KEY;
+  }
+
   componentDidMount() {
     this.updateWeatherData();
   }
@@ -56,7 +61,7 @@ class Main extends Component {
   async updateWeatherData() {
     const { unitsFormat, locationData, language } = this.props;
     const city = locationData.currentCity;
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=3ed9d182aca05f9c062f6571836da453&units=${unitsFormat}&lang=${language}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.weatherKey}&units=${unitsFormat}&lang=${language}`;
     const response = await fetch(url);
     const json = await response.json();
     const weatherForecastArray = this.getWeatherForecast(json);

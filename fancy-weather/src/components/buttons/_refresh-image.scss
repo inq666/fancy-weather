@@ -1,21 +1,9 @@
 @import "../../sass/abstracts/mixins";
-@import "../../sass/abstracts/variables";
 
 .refresh-image {
   @include control-button;
 
   position: relative;
-  .refresh__icon {
-    position: absolute;
-    top: -4px;
-    left: 5px;
-
-    fill: $white;
-  }
-
-  .show-animation {
-    animation: loading-picture 1s infinite linear;
-  }
 }
 
 .background-weather {
@@ -26,6 +14,7 @@
 
   width: 100vw;
   height: 100vh;
+
   background-image: url("../../assets/background.jpg");
   background-size: cover;
   filter: brightness(40%);
@@ -33,20 +22,20 @@
 
 .change-background-enter {
   opacity: 1;
-}
+  &.change-background-enter-active {
+    opacity: 1;
 
-.change-background-enter.change-background-enter-active {
-  opacity: 1;
-  transition: opacity 0.5s linear;
+    transition: opacity 0.5s linear;
+  }
 }
 
 .change-background-leave {
   opacity: 1;
-}
+  &.change-background-leave-active {
+    opacity: 0;
 
-.change-background-leave.change-background-leave-active {
-  opacity: 0;
-  transition: opacity 0.5s linear;
+    transition: opacity 0.5s linear;
+  }
 }
 
 @keyframes loading-picture {
@@ -57,4 +46,3 @@
     transform: rotate(360deg);
   }
 }
-
