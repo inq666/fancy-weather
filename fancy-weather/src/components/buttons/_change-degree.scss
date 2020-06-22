@@ -1,0 +1,71 @@
+@import "../../sass/abstracts/mixins";
+@import "../../sass/abstracts/variables";
+
+.change-degree {
+  width: 120px;
+  height: $control-height;
+  background: linear-gradient(
+    to right,
+    $button-background 0%,
+    $button-background 33%,
+    $active-format 33.5%,
+    $active-format 66.5%,
+    $button-background 66%,
+    $button-background 100%
+  );
+  background-size: 150% 100%;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
+  border-bottom-left-radius: 9px;
+
+  transition: background 0.3s linear;
+
+  div {
+    @include control-button;
+    width: 50%;
+    display: inline-block;
+    margin: 0;
+
+    background-color: #ffffff00;
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  .active-format {
+    cursor: default;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.active-metric {
+  background-position: right bottom;
+}
+.active-imperial {
+  background-position: left bottom;
+}
+
+.changeBackground-enter {
+  opacity: 1;
+}
+
+.changeBackground-enter.changeBackground-enter-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+.changeBackground-leave {
+  opacity: 1;
+}
+
+.changeBackground-leave.changeBackground-leave-active {
+  opacity: 0;
+  transition: opacity 1s linear;
+}

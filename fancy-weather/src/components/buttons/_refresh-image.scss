@@ -1,0 +1,48 @@
+@import "../../sass/abstracts/mixins";
+
+.refresh-image {
+  @include control-button;
+
+  position: relative;
+}
+
+.background-weather {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("../../assets/background.jpg");
+  background-size: cover;
+  filter: brightness(40%);
+}
+
+.change-background-enter {
+  opacity: 1;
+  &.change-background-enter-active {
+    opacity: 1;
+
+    transition: opacity 0.5s linear;
+  }
+}
+
+.change-background-leave {
+  opacity: 1;
+  &.change-background-leave-active {
+    opacity: 0;
+
+    transition: opacity 0.5s linear;
+  }
+}
+
+@keyframes loading-picture {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

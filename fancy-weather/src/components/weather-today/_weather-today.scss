@@ -1,0 +1,38 @@
+@import "../../sass/abstracts/variables";
+
+.weather-today {
+  display: flex;
+  margin-bottom: 50px;
+  .degree {
+    min-width: 480px;
+
+    font-weight: bold;
+    font-size: 20rem;
+
+    .degree__elem {
+      font-size: 10rem;
+      vertical-align: top;
+    }
+  }
+
+  .weather__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 50px;
+
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-align: left;
+    text-transform: uppercase;
+  }
+}
+.icon__container {
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+
+  text-align: center;
+
+  transform: scale(1.8);
+}

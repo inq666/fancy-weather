@@ -1,0 +1,10 @@
+@import "../../sass/abstracts/variables";
+
+.main {
+  margin-top: 150px;
+  color: $white;
+
+  .weather__container {
+    display: flex;
+  }
+}

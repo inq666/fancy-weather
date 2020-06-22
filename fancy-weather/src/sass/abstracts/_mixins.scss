@@ -1,0 +1,28 @@
+@import "./variables";
+
+@mixin control-button {
+  width: 60px;
+  height: $control-height;
+  margin-right: 8px;
+  padding-top: 6px;
+  font-weight: 700;
+  font-size: 1.7rem;
+  font-family: inherit;
+  text-align: center;
+  color: $white;
+
+
+  background-color: $button-background;
+  border: none;
+  border-radius: 9px;
+  outline: none;
+  cursor: pointer;
+
+  transition: background 0.1s linear;
+
+  user-select: none;
+
+  &:hover {
+    background-color: $button-hover;
+  }
+}

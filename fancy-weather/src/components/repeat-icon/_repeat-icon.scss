@@ -1,0 +1,13 @@
+@import "../../sass/abstracts/variables";
+
+.refresh__icon {
+  position: absolute;
+  top: -4px;
+  left: 5px;
+
+  fill: $white;
+}
+
+.show-animation {
+  animation: loading-picture 1s infinite linear;
+}
